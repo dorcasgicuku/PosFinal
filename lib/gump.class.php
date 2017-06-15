@@ -142,10 +142,8 @@ class GUMP
 	 * @param  array $data
 	 * @return array
 	 */
-	public function sanitize(array $input, $fields = NULL, $utf8_encode = true)
-	{
-		$magic_quotes = (bool)get_magic_quotes_gpc();
-		
+	public function sanitize(array $input, $fields = NULL, $utf8_encode = true){
+		$magic_quotes = (bool)get_magic_quotes_gpc();		
 		if(is_null($fields))
 		{
 			$fields = array_keys($input);
