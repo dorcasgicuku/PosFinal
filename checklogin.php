@@ -2,7 +2,7 @@
 session_start();
 	include("lib/db_class.php");
 	include_once "config.php";  
-	$db = new DB($config['database'], $config['host'], $config['username'], $config['password']);
+	$db = new DB("pos", "localhost", "root", "dorcas1994");
 	$tbl_name="stock_user"; 
 
 // username and password sent from form 
