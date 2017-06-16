@@ -578,8 +578,8 @@ table {
 		
 	table tbody td {
 		padding: 0.33em 0 0.833em 1.25em; /* 10/12 15/12 */		
-    	border: 1px solid black;
-	}
+    	/*border: 1px solid black;
+	*/}
 	
 	/* Alternate table row */
         .mytable_row  { background-color: #153450;

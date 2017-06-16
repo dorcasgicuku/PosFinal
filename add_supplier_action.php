@@ -7,7 +7,7 @@ $Contact1=$_POST['contact1'];
 $contact2=$_POST['contact2'];
 
 if(isset($_POST['Submit'])) {
-    $sql="INSERT INTO customer_details(id, customer_name, customer_address,customer_contact1, customer_contact2) VALUES(NUll, '$Name','$Address','$Contact1','$contact2')";
+    $sql="INSERT INTO supplier_details ( supplier_name, supplier_address,supplier_contact1, supplier_contact2, balance) VALUES('$Name','$Address','$Contact1','$contact2', 0.0)";
               
         if (mysql_query($sql) === TRUE) {
     		echo "New record created successfully";

@@ -6,7 +6,7 @@
 	<!-- Stylesheets -->
 	<link href='http://fonts.googleapis.com/css?family=Droid+Sans:400,700' rel='stylesheet'>
 	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/add_customer_style.css">	
+	<link rel="stylesheet" href="css/add_supplier.css">	
 	<!-- Optimize for mobile devices -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	<script  src="dist/js/jquery.ui.draggable.js"></script>
@@ -16,7 +16,7 @@
 	<!-- jQuery & JS files -->
 	<?php include_once("tpl/common_js.php"); ?>
 	<script src="js/script.js"></script> 
-	<script src="js/add_customer.js"></script> 
+	<script src="js/add_supplier.js"></script> 
 </head>
 <body>
 	<!-- TOP BAR -->
@@ -44,31 +44,31 @@
 	<div id="content">		
 		<div class="page-full-width cf">
 			<div class="side-menu fl">				
-				<h3>Customers Management</h3>
+				<h3>Suppliers Management</h3>
 				<ul>
-					<li><a href="add_customer.php">Add Customer</a></li>
-					<li><a href="view_customers.php">View Customers</a></li>
+					<li><a href="add_supplier.php">Add Supplier</a></li>
+					<li><a href="view_supplier.php">View Supplier</a></li>
 				</ul>				                                  
 			</div> <!-- end side-menu -->
 			
 			<div class="side-content fr">			
 				<div class="content-module">				
 					<div class="content-module-heading cf">					
-						<h3 class="fl">Add Customer</h3>
+						<h3 class="fl">Add Supplier</h3>
 						<span class="fr expand-collapse-text">Click to collapse</span>
 						<span class="fr expand-collapse-text initial-expand">Click to expand</span>					
 					</div> <!-- end content-module-heading -->
 
 					<div class="content-module-main cf">
-						<form name="form1" method="post" id="form1" action="add_customer_action.php">
+						<form name="form1" method="post" id="form1" action="add_supplier_action.php">
                   
-                  <p><strong>Add Customer Details </strong> - Add New </p>
+                  <p><strong>Add Supplier Details </strong> - Add New </p>
                   <table class="form"  border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td><span class="man">*</span>Name:</td>
                       <td><input name="name" placeholder="ENTER YOUR FULL NAME" type="text" id="name" maxlength="200"  class="round default-width-input"  /></td>
                      <td>Contact 1 </td>
-                      <td><input name="contact1" placeholder="ENTER YOUR ADDRESS contact1"type="text" id="buyingrate" maxlength="20"   class="round default-width-input" 
+                      <td><input name="contact1" placeholder="ENTER YOUR ADDRESS contact1" type="text" id="buyingrate" maxlength="20"   class="round default-width-input" 
 					  
                     <tr>
                       <td>&nbsp;</td>
@@ -76,7 +76,7 @@
                     </tr>
                     <tr>
                       <td>Address</td>
-                      <td><textarea name="address" placeholder="ENTER YOUR ADDRESS"cols="15" class="round full-width-textarea"></textarea></td>
+                      <td><textarea name="address" placeholder="ENTER YOUR ADDRESS" cols="15" class="round full-width-textarea"></textarea></td>
                    <td>Cnic </td>
                       <td><input name="contact2" placeholder="ENTER YOUR CNIC" type="text" id="sellingrate" maxlength="20"  class="round default-width-input" 
 					   /></td>
