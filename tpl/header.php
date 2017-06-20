@@ -11,7 +11,7 @@
 				<li><a href="page-other.php" class="purchase-tab">Purchase</a></li>
 				<li><a href="page-other.php" class="supplier-tab">Supplier</a></li>
 				<li><a href="page-other.php" class="stock-tab">Stocks / Products</a></li>
-			<!-- 	<li><a href="page-other.php" class="payment-tab">Payments / Outstandings</a></li> -->
+				<li><a href="page-other.php" class="payment-tab">Payments / Outstandings</a></li>
 				<li><a href="page-other.php" class="report-tab">Reports</a></li>
 			</ul> <!-- end tabs -->
 			

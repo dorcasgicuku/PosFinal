@@ -142,8 +142,10 @@ class GUMP
 	 * @param  array $data
 	 * @return array
 	 */
-	public function sanitize(array $input, $fields = NULL, $utf8_encode = true){
-		$magic_quotes = (bool)get_magic_quotes_gpc();		
+	public function sanitize(array $input, $fields = NULL, $utf8_encode = true)
+	{
+		$magic_quotes = (bool)get_magic_quotes_gpc();
+		
 		if(is_null($fields))
 		{
 			$fields = array_keys($input);
@@ -610,9 +612,9 @@ class GUMP
 	 * @param  array $params
 	 * @return string
 	 */	
-	protected function filter_mysql_escape($value, $params = NULL)
+	protected function filter_mysqli_escape($value, $params = NULL)
 	{
-		return mysql_real_escape_string($value);
+		return $value;
 	}
 
 	
