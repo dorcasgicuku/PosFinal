@@ -7,21 +7,17 @@ include_once("init.php");
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Alexandra Keen - Stock</title>
+    <title>Alexandra Keen - User</title>
 
-    <!-- Stylesheets -->
+    <!-- Stylesheets -->  
     <link rel="stylesheet" href="css/style.css">
-
     <!-- Optimize for mobile devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
     <!-- jQuery & JS files -->
     <?php include_once("tpl/common_js.php"); ?>
     <script src="js/script.js"></script>
-
-
     <script LANGUAGE="JavaScript">
-       
+        
         function confirmSubmit() {
             var agree = confirm("Are you sure you wish to Delete this Entry?");
             if (agree)
@@ -36,7 +32,6 @@ include_once("init.php");
             for (i = 0; i < field.length; i++) {
                 if (field[i].checked == true) {
                     flag = flag + 1;
-
                 }
 
             }
@@ -50,7 +45,6 @@ include_once("init.php");
                     document.deletefiles.submit();
                 else
                     return false;
-
             }
         }
         function confirmLimitSubmit() {
@@ -63,7 +57,6 @@ include_once("init.php");
             }
         }
 
-
         function checkAll() {
 
             var field = document.forms.deletefiles;
@@ -75,41 +68,37 @@ include_once("init.php");
             var field = document.forms.deletefiles;
             for (i = 0; i < field.length; i++)
                 field[i].checked = false;
-        }
-        // -->
+        }        
     </script>
     <script>
+
         $(document).ready(function () {
 
             // validate signup form on keyup and submit
             $("#form1").validate({
                 rules: {
-                    name: {
+                    username: {
                         required: true,
                         minlength: 3,
                         maxlength: 200
                     },
-                    address: {
-                        minlength: 3,
+                    password: {
+                        minlength: 6,
                         maxlength: 500
                     },
-                    contact1: {
-                        minlength: 3,
-                        maxlength: 20
-                    },
-                    contact2: {
+                    user_type: {
                         minlength: 3,
                         maxlength: 20
                     }
                 },
                 messages: {
                     name: {
-                        required: "Please enter a supplier Name",
-                        minlength: "supplier must consist of at least 3 characters"
+                        required: "Please enter a User Name",
+                        minlength: "username must consist of at least 3 characters"
                     },
-                    address: {
-                        minlength: "supplier Address must be at least 3 characters long",
-                        maxlength: "supplier Address must be at least 3 characters long"
+                    password: {
+                        minlength: "User Password must be at least 6 characters long",
+                        maxlength: "User Password must be at least 6 characters long"
                     }
                 }
             });
@@ -127,16 +116,14 @@ include_once("init.php");
 
 <!-- HEADER -->
 <div id="header-with-tabs">
-
     <div class="page-full-width cf">
-
         <ul id="tabs" class="fl">
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
-            <li><a href="view_sales.php" class="sales-tab">Sales</a></li>
-            <li><a href="view_customers.php" class=" customers-tab">Customers</a></li>
+            <li><a href="view_sales.php" class=" sales-tab">Sales</a></li>
+            <li><a href="view_customers.php" class="active-tab customers-tab">Customers</a></li>
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
-            <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
-            <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
+            <li><a href="view_supplier.php" class="  supplier-tab">Supplier</a></li>
+            <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
             <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
             <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
@@ -145,49 +132,31 @@ include_once("init.php");
 
         <!-- The logo will automatically be resized to 30px height. -->
         <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
-
     </div>
     <!-- end full-width -->
-
 </div>
 <!-- end header -->
 
-
 <!-- MAIN CONTENT -->
 <div id="content">
-
     <div class="page-full-width cf">
-
         <div class="side-menu fl">
-
-            <h3>Stock Management</h3>
+            <h3>User Management</h3>
             <ul>
-                <li><a href="add_stock.php">Add Stock/Product</a></li>
-                <li><a href="view_product.php">View Stock/Product</a></li>
-                <li><a href="add_category.php">Add Stock Category</a></li>
-                <li><a href="view_category.php">view Stock Category</a></li>
-                <li><a href="view_stock_availability.php">view Stock Available</a></li>
+                <li><a href="add_user.php">Add User</a></li>
+                <li><a href="view_user.php">View User</a></li>
             </ul>
-
         </div>
         <!-- end side-menu -->
-
         <div class="side-content fr">
-
             <div class="content-module">
-
                 <div class="content-module-heading cf">
-
-                    <h3 class="fl">Stock/Product</h3>
+                    <h3 class="fl">Users</h3>
                     <span class="fr expand-collapse-text">Click to collapse</span>
                     <span class="fr expand-collapse-text initial-expand">Click to expand</span>
-
                 </div>
                 <!-- end content-module-heading -->
-
                 <div class="content-module-main cf">
-
-
                     <table>
                         <form action="" method="post" name="search">
                             <input name="searchtxt" type="text" class="round my_text_box" placeholder="Search">
@@ -205,8 +174,8 @@ include_once("init.php");
 
                         <form name="deletefiles" action="delete.php" method="post">
 
-                            <input type="hidden" name="table" value="stock_details">
-                            <input type="hidden" name="return" value="view_product.php">
+                            <input type="hidden" name="table" value="customer_details">
+                            <input type="hidden" name="return" value="view_customers.php">
                             <input type="button" name="selectall" value="SelectAll"
                                    class="my_button round blue   text-upper" onClick="checkAll()"
                                    style="margin-left:5px;"/>
@@ -217,25 +186,21 @@ include_once("init.php");
                                    class="my_button round blue   text-upper" style="margin-left:5px;"
                                    onclick="return confirmDeleteSubmit()"/>
 
-
                             <table>
                                 <?php
 
 
-                                $SQL = "SELECT * FROM  stock_details ORDER BY id DESC";
+                                $SQL = "SELECT * FROM  stock_user ORDER BY id DESC";
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $SQL = "SELECT * FROM  stock_details WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_address LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' ORDER BY id DESC";
-
-
+                                    $SQL = "SELECT * FROM  stock_user WHERE username  LIKE '%" . $_POST['searchtxt'] . "%' OR password LIKE '%" . $_POST['searchtxt'] . "%' OR user_type LIKE '%" . $_POST['searchtxt'] . "%'  ORDER BY id DESC";
                                 }
 
-                                $tbl_name = "stock_details";        //your table name
+                                $tbl_name = "stock_user";        //your table name
 
                                 // How many adjacent pages should be shown on each side?
 
                                 $adjacents = 3;
-
 
                                 /*
 
@@ -244,24 +209,18 @@ include_once("init.php");
                                    If you have a WHERE clause in your query, make sure you mirror it here.
 
                                 */
-
                                 $query = "SELECT COUNT(*) as num FROM $tbl_name";
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $query = "SELECT COUNT(*) as num FROM  stock_details WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%'";
-
+                                    $query = "SELECT COUNT(*) as num FROM  stock_user WHERE username  LIKE '%" . $_POST['searchtxt'] . "%' OR password LIKE '%" . $_POST['searchtxt'] . "%' OR user_type LIKE '%" . $_POST['searchtxt'] . "%' ";
 
                                 }
-
-
                                 $total_pages = mysqli_fetch_array(mysqli_query($db->connection, $query));
 
                                 $total_pages = $total_pages['num'];
-
-
                                 /* Setup vars for query. */
 
-                                $targetpage = "view_product.php";    //your file name  (the name of this file)
+                                $targetpage = "view_user.php";    //your file name  (the name of this file)
 
                                 $limit = 10;                                //how many items to show per page
                                 if (isset($_GET['limit']) && is_numeric($_GET['limit'])) {
@@ -283,17 +242,12 @@ include_once("init.php");
 
                                 /* Get data. */
 
-                                $sql = "SELECT * FROM stock_details  ORDER BY id DESC LIMIT $start, $limit";
+                                $sql = "SELECT * FROM stock_user  ORDER BY id DESC  LIMIT $start, $limit";
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $sql = "SELECT * FROM  stock_details WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%'  ORDER BY id DESC LIMIT $start, $limit";
-
-
+                                    $sql = "SELECT * FROM  stock_user WHERE username  LIKE '%" . $_POST['searchtxt'] . "%' OR password LIKE '%" . $_POST['searchtxt'] . "%' OR user_type LIKE '%" . $_POST['searchtxt'] . "%'  ORDER BY id DESC  LIMIT $start, $limit";
                                 }
-
-
                                 $result = mysqli_query($db->connection, $sql);
-
 
                                 /* Setup page vars for display. */
 
@@ -307,7 +261,6 @@ include_once("init.php");
 
                                 $lpm1 = $lastpage - 1;                        //last page minus 1
 
-
                                 /*
 
                                     Now we apply our rules and draw the pagination object.
@@ -315,7 +268,6 @@ include_once("init.php");
                                     We're actually saving the code to a variable in case we want to draw it more than once.
 
                                 */
-
                                 $pagination = "";
 
                                 if ($lastpage > 1) {
@@ -326,7 +278,7 @@ include_once("init.php");
 
                                     if ($page > 1)
 
-                                        $pagination .= "<a href=\"view_product.php?page=$prev&limit=$limit\" class=my_pagination >Previous</a>";
+                                        $pagination .= "<a href=\"view_cuser.php?page=$prev&limit=$limit\" class=my_pagination >Previous</a>";
 
                                     else
 
@@ -347,7 +299,7 @@ include_once("init.php");
 
                                             else
 
-                                                $pagination .= "<a href=\"view_product.php?page=$counter&limit=$limit\" class=my_pagination>$counter</a>";
+                                                $pagination .= "<a href=\"view_user.php?page=$counter&limit=$limit\" class=my_pagination>$counter</a>";
 
                                         }
 
@@ -367,23 +319,23 @@ include_once("init.php");
 
                                                 else
 
-                                                    $pagination .= "<a href=\"view_product.php?page=$counter&limit=$limit\" class=my_pagination>$counter</a>";
+                                                    $pagination .= "<a href=\"view_users.php?page=$counter&limit=$limit\" class=my_pagination>$counter</a>";
 
                                             }
 
                                             $pagination .= "...";
 
-                                            $pagination .= "<a href=\"view_product.php?page=$lpm1&limit=$limit\" class=my_pagination>$lpm1</a>";
+                                            $pagination .= "<a href=\"view_users.php?page=$lpm1&limit=$limit\" class=my_pagination>$lpm1</a>";
 
-                                            $pagination .= "<a href=\"view_product.php?page=$lastpage&limit=$limit\" class=my_pagination>$lastpage</a>";
+                                            $pagination .= "<a href=\"view_user.php?page=$lastpage&limit=$limit\" class=my_pagination>$lastpage</a>";
 
                                         } //in middle; hide some front and some back
 
                                         elseif ($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2)) {
 
-                                            $pagination .= "<a href=\"view_product.php?page=1&limit=$limit\" class=my_pagination>1</a>";
+                                            $pagination .= "<a href=\"view_user.php?page=1&limit=$limit\" class=my_pagination>1</a>";
 
-                                            $pagination .= "<a href=\"view_product.php?page=2&limit=$limit\" class=my_pagination>2</a>";
+                                            $pagination .= "<a href=\"view_customers.php?page=2&limit=$limit\" class=my_pagination>2</a>";
 
                                             $pagination .= "...";
 
@@ -395,23 +347,23 @@ include_once("init.php");
 
                                                 else
 
-                                                    $pagination .= "<a href=\"view_product.php?page=$counter&limit=$limit\" class=my_pagination>$counter</a>";
+                                                    $pagination .= "<a href=\"view_user.php?page=$counter&limit=$limit\" class=my_pagination>$counter</a>";
 
                                             }
 
                                             $pagination .= "...";
 
-                                            $pagination .= "<a href=\"view_product.php?page=$lpm1&limit=$limit\" class=my_pagination>$lpm1</a>";
+                                            $pagination .= "<a href=\"view_user.php?page=$lpm1&limit=$limit\" class=my_pagination>$lpm1</a>";
 
-                                            $pagination .= "<a href=\"view_product.php?page=$lastpage&limit=$limit\" class=my_pagination>$lastpage</a>";
+                                            $pagination .= "<a href=\"view_user.php?page=$lastpage&limit=$limit\" class=my_pagination>$lastpage</a>";
 
                                         } //close to end; only hide early pages
 
                                         else {
 
-                                            $pagination .= "<a href=\"$view_product.php?page=1&limit=$limit\" class=my_pagination>1</a>";
+                                            $pagination .= "<a href=\"$view_user.php?page=1&limit=$limit\" class=my_pagination>1</a>";
 
-                                            $pagination .= "<a href=\"$view_product.php?page=2&limit=$limit\" class=my_pagination>2</a>";
+                                            $pagination .= "<a href=\"$view_user.php?page=2&limit=$limit\" class=my_pagination>2</a>";
 
                                             $pagination .= "...";
 
@@ -424,37 +376,26 @@ include_once("init.php");
                                                 else
 
                                                     $pagination .= "<a href=\"$targetpage?page=$counter&limit=$limit\" class=my_pagination>$counter</a>";
-
                                             }
-
                                         }
-
                                     }
-
-
                                     //next button
-
                                     if ($page < $counter - 1)
 
-                                        $pagination .= "<a href=\"view_product.php?page=$next&limit=$limit\" class=my_pagination>Next</a>";
+                                        $pagination .= "<a href=\"view_user.php?page=$next&limit=$limit\" class=my_pagination>Next</a>";
 
                                     else
 
                                         $pagination .= "<span class= my_pagination >Next</span>";
 
                                     $pagination .= "</div>\n";
-
                                 }
-
                                 ?>
                                 <tr>
                                     <th>No</th>
-                                    <th>Stock Name</th>
-                                    <th>Stock Id</th>
-                                    <th>Date</th>
-                                    <th>Supplier</th>
-                                    <th>Selling Price</th>
-                                    <th>Stock</th>
+                                    <th>Username</th>
+                                    <th>Password</th>
+                                    <th>User Type</th>
                                     <th>Edit /Delete</th>
                                     <th>Select</th>
                                 </tr>
@@ -467,39 +408,29 @@ include_once("init.php");
                                     <tr>
                                         <td> <?php echo $no + $i; ?></td>
 
-                                        <td><?php echo $row['stock_name']; ?></td>
-                                        <td> <?php echo $row['stock_id']; ?></td>
-                                        <td> <?php echo $row['date']; ?></td>
-                                        <td> <?php echo $row['supplier_id']; ?></td>
-                                        <td> <?php echo $row['selling_price']; ?></td>
-                                        <td> <?php $quantity = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='" . $row['stock_name'] . "'");
-                                            echo $quantity; ?></td>
-
+                                        <td><?php echo $row['username']; ?></td>
+                                        <td> <?php echo $row['password']; ?></td>
+                                        <td> <?php echo $row['user_type']; ?></td>
                                         <td>
-                                            <a href="update_stock.php?sid=<?php echo $row['id']; ?>&table=stock_details&return=view_product.php"
+                                            <a href="update_customer_details.php?sid=<?php echo $row['id']; ?>&table=stock_user&return=view_user.php"
                                                class="table-actions-button ic-table-edit">
                                             </a>
                                             <a onclick="return confirmSubmit()"
-                                               href="delete.php?id=<?php echo $row['id']; ?>&table=stock_details&return=view_supplier.php"
+                                               href="delete.php?id=<?php echo $row['id']; ?>&table=stock_user&return=view_user.php"
                                                class="table-actions-button ic-table-delete"></a>
                                         </td>
                                         <td><input type="checkbox" value="<?php echo $row['id']; ?>" name="checklist[]"
                                                    id="check_box"/></td>
-
                                     </tr>
                                     <?php $i++;
                                 } ?>
                                 <tr>
-
                                     <td align="center">
                                         <div style="margin-left:20px;"><?php echo $pagination; ?></div>
                                     </td>
-
                                 </tr>
                             </table>
                         </form>
-
-
                 </div>
             </div>
             <div id="footer">

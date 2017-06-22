@@ -385,6 +385,7 @@ include_once("init.php");
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
            <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+           <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -564,7 +565,7 @@ include_once("init.php");
                     <form name="form1" method="post" id="form1" action="">
                         <input type="hidden" id="posnic_total">
 
-                        <p><strong>Add Stock/Product </strong> - Add New ( Control +2)</p>
+                        <p><strong>Add Stock/Product </strong> - Add New </p>
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <?php

@@ -88,6 +88,7 @@ include_once("init.php");
             <li><a href="view_supplier.php" class="active-tab   supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
            <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+           <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -172,7 +173,7 @@ include_once("init.php");
 
                             $count = $db->countOf("supplier_details", "supplier_name='$name'");
                             if ($count == 1) {
-                                echo "<font color=red> Dublicat Entry. Please Verify</font>";
+                                echo "<font color=red> Duplicate Entry. Please Verify</font>";
                             } else {
 
                                 if ($db->query("insert into supplier_details values(NULL,'$name','$address','$contact1','$contact2',0)"))

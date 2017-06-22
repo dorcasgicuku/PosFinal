@@ -117,6 +117,7 @@ include_once("init.php");
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
         <!--     <li><a href="view_payments.php" class=" payment-tab">Payments / Outstandings</a></li> -->
+        <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="active-tab report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->

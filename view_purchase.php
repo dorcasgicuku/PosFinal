@@ -138,6 +138,7 @@ include_once("init.php");
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class=" stock-tab">Stocks / Products</a></li>
             <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -218,11 +219,11 @@ include_once("init.php");
                                 <?php
 
 
-                                $SQL = "SELECT DISTINCT(stock_id) FROM  stock_entries where type='entry'";
+                                $SQL = "SELECT * FROM  stock_entries where type='entry'";
 
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $SQL = "SELECT DISTINCT(stock_id) FROM  stock_entries WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' OR type LIKE '%" . $_POST['searchtxt'] . "%' AND type='entry'";
+                                    $SQL = "SELECT * FROM  stock_entries WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' OR type LIKE '%" . $_POST['searchtxt'] . "%' AND type='entry'";
 
 
                                 }
@@ -242,10 +243,10 @@ include_once("init.php");
 
                                 */
 
-                                $query = "SELECT COUNT(DISTINCT stock_id) as num FROM $tbl_name where type='entry'";
+                                $query = "SELECT COUNT(*) as num FROM $tbl_name where type='entry'";
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $query = "SELECT COUNT(DISTINCT stock_id) as num FROM stock_entries WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' OR type LIKE '%" . $_POST['searchtxt'] . "%' and type='entry'";
+                                    $query = "SELECT COUNT(*) as num FROM stock_entries WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' OR type LIKE '%" . $_POST['searchtxt'] . "%' and type='entry'";
 
 
                                 }
@@ -275,11 +276,11 @@ include_once("init.php");
 
                                 /* Get data. */
 
-                                $sql = "SELECT DISTINCT(stock_id) FROM stock_entries where type='entry' ORDER BY date desc LIMIT $start, $limit  ";
+                                $sql = "SELECT * FROM stock_entries where type='entry' ORDER BY date desc LIMIT $start, $limit  ";
 
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $sql = "SELECT DISTINCT(stock_id) FROM stock_entries WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' OR type LIKE '%" . $_POST['searchtxt'] . "%' and type='entry' ORDER BY date desc LIMIT $start, $limit";
+                                    $sql = "SELECT * FROM stock_entries WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR stock_id LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' OR type LIKE '%" . $_POST['searchtxt'] . "%' and type='entry' ORDER BY date desc LIMIT $start, $limit";
 
 
                                 }
@@ -470,7 +471,7 @@ include_once("init.php");
 
                                     <tr>
 
-                                        <td></td>
+                                         <td> <?php echo $no + $i; ?></td>
 
                                         <td width="100"><?php echo $line->stock_id; ?></td>
                                         <td width="100"><?php echo $line->stock_name; ?></td>
