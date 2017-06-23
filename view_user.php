@@ -412,7 +412,7 @@ include_once("init.php");
                                         <td> <?php echo $row['password']; ?></td>
                                         <td> <?php echo $row['user_type']; ?></td>
                                         <td>
-                                            <a href="update_customer_details.php?sid=<?php echo $row['id']; ?>&table=stock_user&return=view_user.php"
+                                            <a href="update_user_details.php?sid=<?php echo $row['id']; ?>&table=stock_user&return=view_user.php"
                                                class="table-actions-button ic-table-edit">
                                             </a>
                                             <a onclick="return confirmSubmit()"

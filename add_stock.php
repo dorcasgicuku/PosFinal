@@ -209,12 +209,12 @@ include_once("init.php");
 
                             $name = mysqli_real_escape_string($db->connection, $_POST['name']);
                             $stockid = mysqli_real_escape_string($db->connection, $_POST['stockid']);
-                            $quantity = mysqli_real_escape_string($db->connection, $_POST['stock_quatity']);
+                            $quantity = mysqli_real_escape_string($db->connection, $_POST['quantity']);
                             $sell = mysqli_real_escape_string($db->connection, $_POST['sell']);
                             $cost = mysqli_real_escape_string($db->connection, $_POST['cost']);
                             $supplier = mysqli_real_escape_string($db->connection, $_POST['supplier']);
                             $category = mysqli_real_escape_string($db->connection, $_POST['category']);
-
+                            
 
                             $count = $db->countOf("stock_details", "stock_id ='$stockid'");
                             if ($count == 1) {
@@ -223,7 +223,7 @@ include_once("init.php");
 
                                 if ($db->query("insert into stock_details(stock_id,stock_name,stock_quatity,supplier_id,company_price,selling_price,category) values('$stockid','$name','$quantity','$supplier','$cost','$sell','$category')")) {
                                     echo "<br><font color=green size=+1 > [ $name ] Stock Details Added !</font>";
-                                    $db->query("insert into stock_avail(name,quantity) values('$name','$quantity')");
+                                   $db->query("insert into stock_avail(name,quantity) values('$name','$quantity')");
                                 } else
                                     echo "<br><font color=red size=+1 >Problem in Adding !</font>";
 
@@ -291,7 +291,7 @@ include_once("init.php");
                                 <td><span class="man">*</span>Quantity: </td> 
                                 <td><input name="quantity" placeholder="QUANTITY" type="text" id="quantity"
                                            maxlength="500" class="round default-width-input"
-                                           value="<?php echo isset($name) ? $name : ''; ?>"/></td>
+                                           value="<?php echo isset($quantity) ? $quantity : ''; ?>"/></td>
 
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>

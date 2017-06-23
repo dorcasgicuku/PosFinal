@@ -82,11 +82,7 @@ include_once("init.php");
 
         <!-- Change this image to your own company's logo -->
         <!-- The logo will automatically be resized to 30px height. -->
-        <a href="#" id="company-branding-small" class="fr"><img src="<?php if (isset($_SESSION['logo'])) {
-                echo "upload/" . $_SESSION['logo'];
-            } else {
-                echo "upload/posnic.png";
-            } ?>" alt="Point of Sale"/></a>
+        <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
 
     </div>
     <!-- end full-width -->
@@ -165,14 +161,15 @@ include_once("init.php");
                                 echo "<font color=red> Duplicate Entry. Please Verify</font>";
                             } else {
 
-                                if ($db->query("insert into category_details values(NULL,'$name','$address')"))
-                                    echo "<br><font color=green size=+1 > [ $name ] Category Details Added !</font>";
-                                else
+                                if ($db->query("insert into category_details values(NULL,'$name','$address')")){
+                                    echo "<script type='text/javascript'>alert( '$name  Category Details Added !')</script> ";
+                                 
+                                    }
+                                else{
                                     echo "<br><font color=red size=+1 >Problem in Adding !</font>";
-
-                            }
-
-
+                                }
+                                echo "<script>window.location = 'add_category.php';</script>";
+                                }
                         }
 
                     }
@@ -182,7 +179,7 @@ include_once("init.php");
 
                     <form name="form1" method="post" id="form1" action="">
 
-                        <p><strong>Add New Category </strong> - Add New ( Control +A)</p>
+                        <p><strong>Add New Category </strong> - Add New </p>
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <td><span class="man">*</span>Name:</td>

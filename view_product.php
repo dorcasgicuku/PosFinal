@@ -166,7 +166,7 @@ include_once("init.php");
                 <li><a href="view_product.php">View Stock/Product</a></li>
                 <li><a href="add_category.php">Add Stock Category</a></li>
                 <li><a href="view_category.php">view Stock Category</a></li>
-                <li><a href="view_stock_availability.php">view Stock Available</a></li>
+              <!--   <li><a href="view_stock_availability.php">view Stock Available</a></li> -->
             </ul>
 
         </div>

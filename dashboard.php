@@ -94,9 +94,9 @@ include_once("init.php");
 
 
                     <table style="width:350px; float:left;" border="0" cellpadding="0" cellspacing="0">
-                        <tr>
+                       <!--  <tr>
                             
-                               <!--  <p class="ourProduct" id="ourProduct">Our Products</p> -->
+                               <p class="ourProduct" id="ourProduct">Our Products</p> 
                                 <tr>
                                     <td><img src="images/orange.jpg" alt="Orange" style="width:200px; height:200px; margin:0 30px 0 30px;"></td>
                                     <td><img src="images/apple.jpg" alt="Apples" style="width:200px; height:200px; margin:0 30px 0 30px;"></td>
@@ -133,7 +133,7 @@ include_once("init.php");
                                 </tr>
                             </td>
                         </tr>
-                        
+                        --> 
                         <th>Statistics</th>
                         <tr>
                             <td width="250" align="left">&nbsp;</td>
