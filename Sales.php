@@ -373,7 +373,7 @@ include_once("init.php");
 
 
 <!-- HEADER -->
-<div id="header-with-tabs">
+<!-- <div id="header-with-tabs">
 
     <div class="page-full-width cf">
 
@@ -381,23 +381,22 @@ include_once("init.php");
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class="active-tab  sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class=" customers-tab">Customers</a></li>
-           <!--  <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
+             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> 
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+             <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> 
            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-           <!--  <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
+             <li><a href="view_report.php" class="report-tab">Reports</a></li> 
         </ul>
-        <!-- end tabs -->
-
-        <!-- Change this image to your own company's logo -->
-        <!-- The logo will automatically be resized to 30px height. -->
+         end tabs 
+         Change this image to your own company's logo 
+        The logo will automatically be resized to 30px height. 
         <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
 
     </div>
-    <!-- end full-width -->
+    end full-width 
 
-</div>
+</div> -->
 <!-- end header -->
 
 
@@ -406,7 +405,7 @@ include_once("init.php");
 
     <div class="page-full-width cf">
 
-        <div class="side-menu fl">
+       <!--  <div class="side-menu fl">
 
             <h3>Sales Management</h3>
             <ul>
@@ -414,7 +413,7 @@ include_once("init.php");
                 <li><a href="view_sales.php">View Sales</a></li>
             </ul>
 
-        </div>
+        </div> -->
         <!-- end side-menu -->
 
         <div class="side-content fr">

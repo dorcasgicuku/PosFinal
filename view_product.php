@@ -134,12 +134,12 @@ include_once("init.php");
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class="sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class=" customers-tab">Customers</a></li>
-            <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
+            <!-- <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
             <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
             <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-            <li><a href="view_report.php" class="report-tab">Reports</a></li>
+           <!--  <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
         </ul>
         <!-- end tabs -->
 
@@ -448,11 +448,11 @@ include_once("init.php");
 
                                 ?>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Stock Name</th>
                                     <th>Stock Id</th>
+                                    <th>Stock Name</th>                                  
                                     <th>Date</th>
                                     <th>Supplier</th>
+                                    <th>Buying Price</th>
                                     <th>Selling Price</th>
                                     <th>Stock</th>
                                     <th>Edit /Delete</th>
@@ -465,15 +465,13 @@ include_once("init.php");
                                 while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                     <tr>
-                                        <td> <?php echo $no + $i; ?></td>
-
-                                        <td><?php echo $row['stock_name']; ?></td>
-                                        <td> <?php echo $row['stock_id']; ?></td>
+                                         <td> <?php echo $row['stock_id']; ?></td>
+                                        <td><?php echo $row['stock_name']; ?></td> 
                                         <td> <?php echo $row['date']; ?></td>
                                         <td> <?php echo $row['supplier_id']; ?></td>
+                                        <td> <?php echo $row['company_price']; ?></td>
                                         <td> <?php echo $row['selling_price']; ?></td>
-                                        <td> <?php $quantity = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='" . $row['stock_name'] . "'");
-                                            echo $quantity; ?></td>
+                                        <td> <?php echo $row['stock_quatity']; ?></td>
 
                                         <td>
                                             <a href="update_stock.php?sid=<?php echo $row['id']; ?>&table=stock_details&return=view_product.php"

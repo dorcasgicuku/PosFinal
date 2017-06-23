@@ -203,12 +203,12 @@ include_once("init.php");
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class=" sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class="active-tab customers-tab">Customers</a></li>
-            <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
+            <!-- <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
             <li><a href="view_supplier.php" class="  supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
             <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
              <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-            <li><a href="view_report.php" class="report-tab">Reports</a></li>
+            <!-- <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
         </ul>
         <!-- end tabs -->
 
@@ -320,7 +320,7 @@ include_once("init.php");
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                 <td><span class="man">*</span> Password :</td>
+                                 <td><span class="man">*</span> Password:</td>
                                 <td><input name="password" placeholder="ENTER YOUR PASSWORD " type="password"
                                            id="password" maxlength="20" class="round default-width-input"
                                            value="<?php echo isset($password) ? $password : ''; ?>"/></td>
@@ -330,10 +330,10 @@ include_once("init.php");
                                 <td>&nbsp;</td>
                             </tr>
                              <tr>
-                                 <td><span class="man">*</span> Password Confirmation:</td>
-                                <td><input name="password_confirmation" placeholder="CONFIRM YOUR PASSWORD " type="password"
-                                           id="password_confirmation" maxlength="20" class="round default-width-input"
-                                           value="<?php echo isset($password_confirmation) ? $password_confirmation : ''; ?>"/></td>
+                                 <td><span class="man">*</span> User Type:</td>
+                                <td><input name="user_type" placeholder="User Type  " type="text"
+                                           id="user_type" maxlength="20" class="round default-width-input"
+                                           value="<?php echo isset($user_type) ? $user_type : ''; ?>"/></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
