@@ -36,12 +36,12 @@ include_once("init.php");
             <li><a href="dashboard.php" class="active-tab dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class="sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class=" customers-tab">Customers</a></li>
-            <!-- <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
+            <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class=" stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-            <!-- <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
+            <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
         <!-- The logo will automatically be resized to 30px height. -->
@@ -71,7 +71,8 @@ include_once("init.php");
                 <li><a href="add_stock.php">Add Purchase</a></li>
                 <li><a href="add_supplier.php">Add Supplier</a></li>
                 <li><a href="add_customer.php">Add Customer</a></li>
-                <!-- <li><a href="view_report.php">Report</a></li> -->
+                <li><a href="view_stock_availability.php">View Available Stock</a></li>
+                <li><a href="view_report.php">Report</a></li>
             </ul>
 
         </div>
@@ -148,7 +149,7 @@ include_once("init.php");
                             <td align="left">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td align="left">Tatal Sales Transactions</td>
+                            <td align="left">Total Sales Transactions</td>
                             <td align="left"><?php echo $count = $db->countOfAll("stock_sales"); ?></td>
                         </tr>
                         <tr>

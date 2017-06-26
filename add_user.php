@@ -161,10 +161,16 @@ include_once("init.php");
                         minlength: 6,
                         maxlength: 500
                     },
-                    password_confirmation: {
+                    user_type: {
                         minlength: 6,
                         maxlength: 500
                     }
+                    ,
+                    answer: {
+                        minlength: 6,
+                        maxlength: 500
+                    }
+                   
                 },
                 messages: {
                     name: {
@@ -175,9 +181,12 @@ include_once("init.php");
                         minlength: "Use password must be at least 6 characters long",
                         maxlength: "Use password must be at least 6 characters long"
                     },
-                      password_confirmation: {
-                       minlength: "Use password must be at least 6 characters long",
-                        maxlength: "Use password must be at least 6 characters long"
+                      user_type: {
+                       minlength: "Enter User Type",                        
+                    },
+                    answer: {
+                        minlength: "Give an answer to the security question",
+                        
                     },
                 }
             });
@@ -203,16 +212,15 @@ include_once("init.php");
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class=" sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class="active-tab customers-tab">Customers</a></li>
-            <!-- <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
+            <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class="  supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
              <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-            <!-- <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
+            <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
 
-        <!-- Change this image to your own company's logo -->
         <!-- The logo will automatically be resized to 30px height. -->
         <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
 

@@ -106,7 +106,7 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -147,18 +147,18 @@ include_once("init.php");
                     <tr>
                         <td width="110"><strong><?php
 
-                                echo $db->queryUniqueValue("select sum(balance) FROM  stock_entries where count1=1 and type='entry'");
+                                echo $db->queryUniqueValue("select sum(balance) FROM  stock_entries where type='entry'");
                                 ?></strong></td>
                     </tr>
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
                     <tr>
-                        <td>Tatal Sales:</td>
+                        <td>Total Sales:</td>
                     </tr>
                     <tr>
                         <td>
-                            <strong><?php echo $age = $db->queryUniqueValue("SELECT sum(subtotal) FROM stock_sales where count1=1 "); ?></strong>
+                            <strong><?php echo $age = $db->queryUniqueValue("SELECT sum(subtotal) FROM stock_sales "); ?></strong>
                         </td>
                     </tr>
                     <tr>
@@ -169,7 +169,7 @@ include_once("init.php");
                     </tr>
                     <tr>
                         <td>
-                            <strong><?php echo $db->queryUniqueValue("select sum(balance) FROM  stock_sales where count1=1 ");
+                            <strong><?php echo $db->queryUniqueValue("select sum(balance) FROM  stock_sales ");
                                 ?></strong></td>
                     </tr>
                     <tr>
@@ -227,12 +227,12 @@ include_once("init.php");
                                 $max = $db->maxOfAll("id", "transactions");
                                 $receiptid = "RCPT" . $max;
                                 if ($db->query("UPDATE stock_sales SET balance=$balance,payment=$payment,due='$due' where transactionid='$id'")) {
-                                    $db->query("INSERT INTO transactions(type,customer,payment,balance,rid,due,subtotal,receiptid) values('sales','$customer','$newpayment','$balance','$id','$due','$subtotal','$receiptid')");
+                                    $db->query("INSERT INTO transactions(type,customer,supplier,payment,balance,rid,due,subtotal,receiptid) values('sales','$customer',NULL,'$newpayment','$balance','$id','$due','$subtotal','$receiptid')");
                                     $max = $db->maxOfAll("id", "transactions");
                                     echo "<br><font color=green size=+1 > [ $id ] Customer Details Updated!</font>";
                                     echo "<script>window.open('payment_receipt_print.php?sid=$max','myNewWinsr','width=620,height=800,toolbar=0,menubar=no,status=no,resizable=yes,location=no,directories=no');</script>";
                                 } else
-                                    echo "<br><font color=red size=+1 >Problem in Updation !</font>";
+                                    echo "<br><font color=red size=+1 >Problem in Updating !</font>";
                             }
 
                             ?>

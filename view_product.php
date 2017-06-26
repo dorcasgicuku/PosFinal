@@ -134,12 +134,12 @@ include_once("init.php");
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class="sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class=" customers-tab">Customers</a></li>
-            <!-- <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
+            <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
             <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-           <!--  <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
+            <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
 
@@ -166,7 +166,7 @@ include_once("init.php");
                 <li><a href="view_product.php">View Stock/Product</a></li>
                 <li><a href="add_category.php">Add Stock Category</a></li>
                 <li><a href="view_category.php">view Stock Category</a></li>
-              <!--   <li><a href="view_stock_availability.php">view Stock Available</a></li> -->
+                <li><a href="view_stock_availability.php">view Stock Available</a></li>
             </ul>
 
         </div>

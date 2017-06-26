@@ -381,12 +381,12 @@ include_once("init.php");
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class="active-tab  sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class=" customers-tab">Customers</a></li>
-           <!--  <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
+            <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-           <!--  <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
+            <li><a href="view_report.php" class="report-tab">Reports</a></li> 
         </ul>
         <!-- end tabs -->
 
@@ -511,51 +511,44 @@ include_once("init.php");
                             $max = $db->maxOfAll("id", "stock_entries");
                             $max = $max + 1;
                             $autoid = "SD" . $max . "";
+                            
                             for ($i = 0; $i < count($stock_name); $i++) {
-                                $name1 = $stock_name[$i];
+                                 $name1 = $_POST['stock_name'][$i];
                                 $quantity = $_POST['quty'][$i];
                                 $rate = $_POST['sell'][$i];
                                 $total = $_POST['total'][$i];
-
-
                                 $selected_date = $_POST['date'];
                                 $selected_date = strtotime($selected_date);
                                 $mysqldate = date('Y-m-d H:i:s', $selected_date);
                                 $username = $_SESSION['username'];
+//$count = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='$name1'");
 
-                                $count = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='$name1'");
+                                // if ($count >= 1) {
+                                        $db->query("insert into stock_sales (tax,tax_dis,discount,dis_amount,grand_total,transactionid,stock_name,selling_price,quantity,amount,date,username,customer_id,subtotal,payment,balance,due,mode,description,billnumber)
+                                        values('$tax','$tax_dis','$discount','$dis_amount','$payable','$autoid','$name1','$rate','$quantity','$total','$mysqldate','$username','$customer','$subtotal','$payment','$balance','$due','$mode','$description','$bill_no')");
 
-                                if ($count >= 1) {
+                                        $amount = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='$name1'");
+                                        $amount1 = $amount - $quantity;
+                                        // $supplier1=$db->queryUniqueValue("SELECT supplier_id FROM stock_details WHERE stock_name='$stock_name'");
 
-
-                                    $db->query("insert into stock_sales (tax,tax_dis,discount,dis_amount,grand_total,transactionid,stock_name,selling_price,quantity,amount,date,username,customer_id,subtotal,payment,balance,due,mode,description,count1,billnumber)
-                            values('$tax','$tax_dis','$discount','$dis_amount','$payable','$autoid','$name1','$rate','$quantity','$total','$mysqldate','$username','$customer','$subtotal','$payment','$balance','$due','$mode','$description',$i+1,'$bill_no')");
-
-                                    $amount = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='$name1'");
-                                    $amount1 = $amount - $quantity;
-
-                                    $db->query("insert into stock_entries (stock_id,stock_name,quantity,opening_stock,closing_stock,date,username,type,salesid,total,selling_price,count1,billnumber) values('$autoid','$name1','$quantity','$amount','$amount1','$mysqldate','$username','sales','$autoid','$total','$rate',$i+1,'$bill_no')");
-                                    //echo "<br><font color=green size=+1 >New Sales Added ! Transaction ID [ $autoid ]</font>" ;
+                                        // $db->query("insert into stock_entries (stock_id,stock_name,stock_supplier_name,quantity,opening_stock,closing_stock,date,username,type,salesid,total,selling_price,count1,billnumber) values('$autoid','$name1','$supplier1','$quantity','0.0','$amount','$amount1','$mysqldate','$username','sales','$autoid','$total','$rate','0','$bill_no')");
+                                        
 
 
-                                    $amount = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='$name1'");
-                                    $amount1 = $amount - $quantity;
-                                    $db->execute("UPDATE stock_avail SET quantity='$amount1' WHERE name='$name1'");
+                                        $amount = $db->queryUniqueValue("SELECT quantity FROM stock_avail WHERE name='$name1'");
+                                        $amount1 = $amount - $quantity;
+                                        $db->execute("UPDATE stock_avail SET quantity='$amount1' WHERE name='$name1'");
+                                        $msg = "<br><font color=green size=6px >Sale order Added successfully Ref: [" . $_POST['stockid'] . "] !</font>";
+                                        echo "<script>window.location = 'add_sales.php?msg=$msg';</script>";
 
-                                } else {
-                                    echo "<br><font color=green size=+1 >There is no enough stock deliver for $name1! Please add stock !</font>";
-                                }
-
-
+                                        echo "<script>window.open('add_sales_print.php?sid=$autoid','myNewWinsr','width=620,height=800,toolbar=0,menubar=no,status=no,resizable=yes,location=no,directories=no');</script>";
+                                // }
+                                // else {
+                                //     echo "<br><font color=green size=+1 >There is no enough stock deliver for $name1! Please add stock !</font>";
+                                // } 
                             }
-                            $msg = "<br><font color=green size=6px >Sales Added successfully Ref: [" . $_POST['stockid'] . "] !</font>";
-                            echo "<script>window.location = 'add_sales.php?msg=$msg';</script>";
-
-
-                            echo "<script>window.open('add_sales_print.php?sid=$autoid','myNewWinsr','width=620,height=800,toolbar=0,menubar=no,status=no,resizable=yes,location=no,directories=no');</script>";
-                            //echo "<script>window.open('add_sales_print.php?sid=$autoid','myNewWinsr','width=620,height=800,toolbar=0,menubar=no,status=no,resizable=yes,location=no,directories=no');</script>";
-                            //$msg="<br><font color=green size=6px >Parchase order Added successfully Ref: [". $_POST['stockid']."] !</font>" ;
-                            //header("location:  add_purchase.php?msg=$msg");
+                            
+                           
                         }
 
                     }

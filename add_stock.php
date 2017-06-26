@@ -56,9 +56,23 @@ include_once("init.php");
                         required: true,
 
                     },
+                    supplier: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 200
+
+                    },
+                    category: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 200
+
+                    },
                     sell: {
                         required: true,
-
+                    },
+                    quantity: {
+                        required: true,
                     }
                 },
                 messages: {
@@ -74,9 +88,20 @@ include_once("init.php");
                         required: "Please Enter Selling Price",
                         minlength: "Category Name must consist of at least 3 characters"
                     },
+                    supplier: {
+                        required: "Please Enter Supplier Name",
+                        minlength: "Supplier Name must consist of at least 3 characters"
+                    },
+                    category: {
+                        required: "Please Enter Stock Category",
+                        minlength: "Category Name must consist of at least 3 characters"
+                    },
                     cost: {
                         required: "Please Enter Cost Price",
                         minlength: "Category Name must consist of at least 3 characters"
+                    },
+                    quantity:{
+                        required: "Please Enter Stock Quantity"
                     }
                 }
             });
@@ -110,16 +135,15 @@ include_once("init.php");
             <li><a href="dashboard.php" class="dashboard-tab">Dashboard</a></li>
             <li><a href="view_sales.php" class="sales-tab">Sales</a></li>
             <li><a href="view_customers.php" class=" customers-tab">Customers</a></li>
-            <!-- <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li> -->
+            <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
             <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
-            <!-- <li><a href="view_report.php" class="report-tab">Reports</a></li> -->
+            <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
 
-        <!-- Change this image to your own company's logo -->
         <!-- The logo will automatically be resized to 30px height. -->
         <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
 
@@ -243,10 +267,10 @@ include_once("init.php");
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <?php
-                                $max = $db->maxOfAll("id", "stock_details");
-                                $max = $max + 1;
+                                   $max = $db->maxOfAll("id", "stock_details");
+                                   $max = $max + 1;
                                 $autoid = "SD" . $max . "";
-                                ?>
+                                ?> 
                                 <td><span class="man">*</span>Stock ID:</td>
                                 <td><input name="stockid" type="text" id="stockid" readonly="readonly" maxlength="200"
                                            class="round default-width-input"
@@ -274,12 +298,12 @@ include_once("init.php");
 
                             </tr>
                             <tr>
-                                <td>Supplier:</td>
+                                <td><span class="man">*</span>Supplier:</td>
                                 <td><input name="supplier" placeholder="ENTER SUPPLIER NAME" type="text" id="supplier"
                                            maxlength="200" class="round default-width-input"
                                            value="<?php echo isset($supplier) ? $supplier : ''; ?>"/></td>
 
-                                <td>Category:</td>
+                                <td><span class="man">*</span>Category:</td>
                                 <td><input name="category" placeholder="ENTER CATEGORY NAME" type="text" id="category"
                                            maxlength="200" class="round default-width-input"
                                            value="<?php echo isset($category) ? $category : ''; ?>"/></td>

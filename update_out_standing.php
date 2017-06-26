@@ -44,6 +44,15 @@ include_once("init.php");
                         required: true
 
                     }
+                    ,
+                    receipt_id: {
+                        required: true
+
+                    },
+                    new_payment: {
+                        required: true
+
+                    }
                 },
                 messages: {
                     name: {
@@ -55,6 +64,14 @@ include_once("init.php");
                     },
                     sell: {
                         required: "Please enter a Sell Price"
+                    }
+                    ,
+                    receipt_id: {
+                        required: "Please enter a Receipt ID"
+                    }
+                    ,
+                    new_payment: {
+                        required: "Please enter the New Payments"
                     }
                 }
             });
@@ -91,17 +108,13 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
 
         <!-- The logo will automatically be resized to 30px height. -->
-        <a href="#" id="company-branding-small" class="fr"><img src="<?php if (isset($_SESSION['logo'])) {
-                echo "upload/" . $_SESSION['logo'];
-            } else {
-                echo "upload/posnic.png";
-            } ?>" alt="Point of Sale"/></a>
+        <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
     </div>
     <!-- end full-width -->
 </div>
@@ -149,7 +162,8 @@ include_once("init.php");
                                 $payment = mysqli_real_escape_string($db->connection, $_POST['payment']);
                                 $supplier = mysqli_real_escape_string($db->connection, $_POST['supplier']);
                                 $subtotal = mysqli_real_escape_string($db->connection, $_POST['total']);
-                                $newpayment = mysqli_real_escape_string($db->connection, $_POST['new_payment']);
+                                $newpayment = mysqli_real_escape_string($db->connection, $_POST['receipt_id']);
+                                $receipt_id=mysqli_real_escape_string($db->connection, $_POST['new_payment']);
                                 $selected_date = $_POST['date'];
                                 $selected_date = strtotime($selected_date);
                                 $mysqldate = date('Y-m-d H:i:s', $selected_date);
@@ -158,7 +172,7 @@ include_once("init.php");
                                 $payment = (int)$payment + (int)$newpayment;
 
                                 if ($db->query("UPDATE stock_entries  SET balance='$balance',payment='$payment',due='$due' where stock_id='$id'")) {
-                                    $db->query("INSERT INTO transactions(type,supplier,payment,balance,rid,due,subtotal) values('entry','$supplier','$newpayment','$balance','$id','$due','$subtotal')");
+                                    $db->query("INSERT INTO transactions(type,supplier,payment,balance,rid,receiptid,due,subtotal) values('entry','$supplier','$newpayment','$balance','$id','$receipt_id','$due','$subtotal')");
                                     echo "<br><font color=green size=+1 > [ $id ] Supplier Details Updated!</font>";
                                 } else
                                     echo "<br><font color=red size=+1 >Problem in Updation !</font>";
@@ -174,7 +188,7 @@ include_once("init.php");
                             ?>
                             <form name="form1" method="post" id="form1" action="">
 
-                                <input name="id" type="hidden" value="<?php echo $_GET['sid']; ?>">
+                                <input name="id" type="hidden" value="<?php echo $_GET['sid']; ?>" /> 
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>Sales ID</td>
@@ -182,11 +196,16 @@ include_once("init.php");
                                                id="stockid" maxlength="200" class="round default-width-input"
                                                value="<?php echo $line->stock_id; ?> "/>
                                     </td>
-                                    <td>&nbsp;</td>
+                                    
+                                    <td>Receipt ID</td>
+                                    <td><input name="receipt_id" type="text" 
+                                               id="stockid" maxlength="200" class="round default-width-input"
+                                               />
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td>Customer</td>
+                                    <td>Supplier</td>
                                     <td><input name="customer" type="text" id="customer" maxlength="200"
                                                readonly="readonly" class="round default-width-input"
                                                value="<?php echo $line->stock_supplier_name; ?> "/></td>

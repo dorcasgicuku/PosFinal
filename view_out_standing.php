@@ -138,7 +138,7 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class=" stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -431,7 +431,7 @@ include_once("init.php");
                                         <td> <?php echo $no + $i; ?></td>
 
                                         <td><?php echo $row['stock_id']; ?></td>
-                                        <td> <?php echo $row['stock_id']; ?></td>
+                                        <td> <?php echo $row['due']; ?></td>
                                         <td> <?php echo $row['stock_supplier_name']; ?></td>
                                         <td> <?php echo $row['total']; ?></td>
                                         <td> <?php echo $row['payment']; ?></td>
