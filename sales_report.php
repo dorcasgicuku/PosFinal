@@ -66,17 +66,17 @@ if (!isset($_SESSION['username']) || $_SESSION['usertype'] != 'admin') { // if s
                                     <tr>
                                         <td width="150"><strong>Total Sales </strong></td>
                                         <td width="150">
-                                            &nbsp;<?php echo $age = $db->queryUniqueValue("SELECT sum(subtotal) FROM stock_sales where count1=1 AND date BETWEEN '$fromdate' AND '$todate' "); ?></td>
+                                            &nbsp;<?php echo $age = $db->queryUniqueValue("SELECT sum(subtotal) FROM stock_sales where date BETWEEN '$fromdate' AND '$todate' "); ?></td>
                                     </tr>
                                     <tr>
                                         <td><strong>Received Amount</strong></td>
                                         <td>
-                                            &nbsp;<?php echo $age = $db->queryUniqueValue("SELECT sum(payment) FROM stock_sales where count1=1 AND date BETWEEN '$fromdate' AND '$todate' "); ?></td>
+                                            &nbsp;<?php echo $age = $db->queryUniqueValue("SELECT sum(payment) FROM stock_sales where  date BETWEEN '$fromdate' AND '$todate' "); ?></td>
                                     </tr>
                                     <tr>
                                         <td width="150"><strong>Total OutStanding </strong></td>
                                         <td width="150">
-                                            &nbsp;<?php echo $age = $db->queryUniqueValue("SELECT sum(balance) FROM stock_sales where count1=1 AND date BETWEEN '$fromdate' AND '$todate' "); ?></td>
+                                            &nbsp;<?php echo $age = $db->queryUniqueValue("SELECT sum(balance) FROM stock_sales where  date BETWEEN '$fromdate' AND '$todate' "); ?></td>
                                     </tr>
                                 </table>
                             </td>
@@ -123,7 +123,7 @@ if (!isset($_SESSION['username']) || $_SESSION['usertype'] != 'admin') { // if s
                                         <td>&nbsp;</td>
                                     </tr>
                                     <?php
-                                    $result = $db->query("SELECT * FROM stock_sales where count1=1 AND date BETWEEN '$fromdate' AND '$todate' ");
+                                    $result = $db->query("SELECT * FROM stock_sales where date BETWEEN '$fromdate' AND '$todate' ");
                                     while ($line = $db->fetchNextObject($result)) {
                                         ?>
 

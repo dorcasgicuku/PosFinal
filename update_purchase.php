@@ -304,7 +304,8 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="active-tab purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+           <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -402,7 +403,7 @@ include_once("init.php");
                             $i++;
                             $j++;
                         }
-                        echo "<br><font color=green size=+1 >Parchase order Updated successfully Ref: [ $autoid] !</font>";
+                        echo "<br><font color=green size=+1 >Purchase order Updated successfully Ref: [ $autoid] !</font>";
                     }
                     ?>
                     <?php

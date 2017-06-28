@@ -7,7 +7,7 @@ include_once("init.php");
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Alexandra Keen - Add Customer</title>
+    <title>Alexandra Keen - Update Customer</title>
 
     <!-- Stylesheets -->
 
@@ -82,7 +82,8 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -108,14 +109,14 @@ include_once("init.php");
         <div class="side-content fr">
             <div class="content-module">
                 <div class="content-module-heading cf">
-                    <h3 class="fl">Add Customer</h3>
+                    <h3 class="fl">Update Customer</h3>
                     <span class="fr expand-collapse-text">Click to collapse</span>
                     <span class="fr expand-collapse-text initial-expand">Click to expand</span>
                 </div>
                 <!-- end content-module-heading -->
                 <div class="content-module-main cf">
                     <form name="form1" method="post" id="form1" action="">
-                        <p><strong>Add Customer Details </strong> - Add New </p>
+                        <p><strong>Update Customer Details </strong> </p>
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <?php
                             if (isset($_POST['id'])) {

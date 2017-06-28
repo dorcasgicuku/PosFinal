@@ -5,8 +5,14 @@ if (!defined('posnicEntry')) {
     define('posnicEntry', true);
 }
 if (isset($_SESSION['username'])) {
-    if ($_SESSION['usertype'] == 'admin') // if session variable "username" does not exist.
+    if ($_SESSION['usertype'] == 'admin') {
         header("location: dashboard.php"); // Re-direct to index.php
+    }
+    //  if ($_SESSION['usertype'] == 'sales') {
+    //     header("location: Sales.php"); // Re-direct to index.php
+    // }
+    
+
 }
 ?>
 <!DOCTYPE html>

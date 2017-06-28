@@ -84,7 +84,8 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -112,39 +113,41 @@ include_once("init.php");
         <div class="side-content fr">
             <div class="content-module">
                 <div class="content-module-heading cf">
-                    <h3 class="fl">Update Supplier</h3>
+                    <h3 class="fl">Update Stock</h3>
                     <span class="fr expand-collapse-text">Click to collapse</span>
                     <span class="fr expand-collapse-text initial-expand">Click to expand</span>
                 </div>
                 <!-- end content-module-heading -->
                 <div class="content-module-main cf">
                     <form name="form1" method="post" id="form1" action="">
-                        <p><strong>Add Supplier Details </strong> - Add New </p>
+                        <p><strong>Update Stock Details </strong> - Add New </p>
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <?php
                             if (isset($_POST['id'])) {
 
                                 $id = mysqli_real_escape_string($db->connection, $_POST['id']);
-                                $name = trim(mysqli_real_escape_string($db->connection, $_POST['name']));
-                                $sell = trim(mysqli_real_escape_string($db->connection, $_POST['sell']));
-                                $cost = trim(mysqli_real_escape_string($db->connection, $_POST['cost']));
-                                $Category = trim(mysqli_real_escape_string($db->connection, $_POST['Category']));
-                                $date = trim(mysqli_real_escape_string($db->connection, $_POST['date']));
-                                $supplier = trim(mysqli_real_escape_string($db->connection, $_POST['supplier']));
+                                $name = mysqli_real_escape_string($db->connection, $_POST['name']);
+                                $stockid = mysqli_real_escape_string($db->connection, $_POST['stockid']);
+                                $quantity = mysqli_real_escape_string($db->connection, $_POST['quantity']);
+                                $sell = mysqli_real_escape_string($db->connection, $_POST['sell']);
+                                $cost = mysqli_real_escape_string($db->connection, $_POST['cost']);
+                                $supplier = mysqli_real_escape_string($db->connection, $_POST['supplier']);
+                                $category = mysqli_real_escape_string($db->connection, $_POST['category']);
+                            
 
 
-                                if ($db->query("UPDATE stock_details  SET stock_name ='$name',supplier_id='$supplier',company_price='$cost',selling_price='$sell',category='$Category',date='$date'  where id=$id"))
-                                    echo "<br><font color=green size=+1 > [ $name ] Supplier Details Updated!</font>";
+                                if ($db->query("UPDATE stock_details  SET stock_name ='$name', stock_quatity='$quantity', supplier_id='$supplier',company_price='$cost',selling_price='$sell',category='$category' where id=$id"))
+                                    echo "<br><font color=green size=+1 > [ $name ] Stock Details Updated!</font>";
                                 else
-                                    echo "<br><font color=red size=+1 >Problem in Updation !</font>";
+                                    echo "<br><font color=red size=+1 >Problem in Updating !</font>";
                             }
-
                             ?>
                             <?php
                             if (isset($_GET['sid']))
                                 $id = $_GET['sid'];
 
                             $line = $db->queryUniqueObject("SELECT * FROM stock_details WHERE id=$id");
+                           
                             ?>
                             <form name="form1" method="post" id="form1" action="">
 
@@ -156,16 +159,21 @@ include_once("init.php");
                                                class="round default-width-input"
                                                value="<?php echo $line->stock_id; ?> "/>
                                     </td>
+                                    <td>Stock Quantity</td>
+                                    <td><input name="quantity" type="text"  id="name" maxlength="200"
+                                               class="round default-width-input"
+                                               value="<?php echo $line->stock_quatity; ?> "/>
+                                    </td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
-                                    <td>Name</td>
+                                    <td> Stock Name</td>
                                     <td><input name="name" type="text" id="name" maxlength="200"
                                                class="round default-width-input"
                                                value="<?php echo $line->stock_name; ?> "/></td>
                                     <td>Category</td>
-                                    <td><input name="Category" type="text" id="category" maxlength="20"
+                                    <td><input name="category" type="text" id="category" maxlength="20"
                                                class="round default-width-input"
                                                value="<?php echo $line->category; ?>"/></td>
                                 </tr>
@@ -189,10 +197,7 @@ include_once("init.php");
                                     <td><input name="supplier" type="text" id="supplier" maxlength="20"
                                                class="round default-width-input"
                                                value="<?php echo $line->supplier_id; ?>"/></td>
-                                    <td>Expiry Date</td>
-                                    <td><input name="date" type="text" id="date" maxlength="20"
-                                               class="round default-width-input"
-                                               value="<?php echo $line->date; ?>"/></td>
+                                    
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>

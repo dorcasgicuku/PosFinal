@@ -131,7 +131,8 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -195,11 +196,13 @@ include_once("init.php");
                                    class="my_button round blue   text-upper" style="margin-left:5px;"
                                    onclick="return confirmDeleteSubmit()"/>
                             <table>
-                                <?php
-                                $SQL = "SELECT * FROM  category_details ORDER BY id DESC";
+                              <?php
+
+
+                                $sql = "SELECT * FROM  category_details ORDER BY id DESC";
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $SQL = "SELECT * FROM  category_details WHERE category_name LIKE '%" . $_POST['searchtxt'] . "%' ORDER BY id DESC ";
+                                    $sql = "SELECT * FROM  category_details WHERE category_name  LIKE '%" . $_POST['searchtxt'] . "%' OR category_description LIKE '%" . $_POST['searchtxt'] . "%' ORDER BY id DESC";
                                 }
 
                                 $tbl_name = "category_details";        //your table name
@@ -207,6 +210,7 @@ include_once("init.php");
                                 // How many adjacent pages should be shown on each side?
 
                                 $adjacents = 3;
+
                                 /*
 
                                    First get total number of rows in data table.
@@ -214,18 +218,15 @@ include_once("init.php");
                                    If you have a WHERE clause in your query, make sure you mirror it here.
 
                                 */
-
                                 $query = "SELECT COUNT(*) as num FROM $tbl_name";
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $query = "SELECT COUNT(*) as num FROM  category_details WHERE category_name LIKE '%" . $_POST['searchtxt'] . "%' ";
+                                    $query = "SELECT COUNT(*) as num FROM  category_details WHERE category_name  LIKE '%" . $_POST['searchtxt'] . "%' OR category_description LIKE '%" . $_POST['searchtxt'] . "%' ";
 
                                 }
-
                                 $total_pages = mysqli_fetch_array(mysqli_query($db->connection, $query));
 
                                 $total_pages = $total_pages['num'];
-
                                 /* Setup vars for query. */
 
                                 $targetpage = "view_category.php";    //your file name  (the name of this file)
@@ -238,6 +239,7 @@ include_once("init.php");
 
                                 $page = isset($_GET['page']) ? $_GET['page'] : 0;
 
+
                                 if ($page)
 
                                     $start = ($page - 1) * $limit;            //first item to display on this page
@@ -248,14 +250,17 @@ include_once("init.php");
 
 
                                 /* Get data. */
-                                $sql = "SELECT * FROM category_details LIMIT $start, $limit  ORDER BY id DESC";
+
+                                $sql = "SELECT * FROM category_details  ORDER BY id DESC  LIMIT $start, $limit";
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $sql = "SELECT * FROM  category_details WHERE category_name LIKE '%" . $_POST['searchtxt'] . "%' ORDER BY id DESC LIMIT $start, $limit";
+                                    $sql = "SELECT * FROM  customer_details WHERE customer_name  LIKE '%" . $_POST['searchtxt'] . "%' OR customer_address LIKE '%" . $_POST['searchtxt'] . "%' OR customer_contact1 LIKE '%" . $_POST['searchtxt'] . "%' OR customer_contact1 LIKE '%" . $_POST['searchtxt'] . "%' ORDER BY id DESC  LIMIT $start, $limit";
                                 }
                                 $result = mysqli_query($db->connection, $sql);
 
+
                                 /* Setup page vars for display. */
+
 
                                 if ($page == 0) $page = 1;                    //if no page var is given, default to 1.
 
@@ -296,6 +301,7 @@ include_once("init.php");
                                     if ($lastpage < 7 + ($adjacents * 2))    //not enough pages to bother breaking it up
 
                                     {
+
 
                                         for ($counter = 1; $counter <= $lastpage; $counter++) {
 
@@ -404,7 +410,7 @@ include_once("init.php");
                                 <tr>
                                     <th>No</th>
                                     <th>Category Name</th>
-                                    <th>description</th>
+                                    <th>Description</th>
                                     <th>Edit /Delete</th>
                                     <th>Select</th>
                                 </tr>

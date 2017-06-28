@@ -32,8 +32,14 @@ if ($count == 1) {
 
     if ($row[3] == "admin")
         header("location: dashboard.php");
-    else
+    // else
+    // 	if ($row[3] == "sales"){
+    // 		header("location: Sales.php");
+
+    // 	}
+    	else{
         die("Not Valid User Type. Check with your application administartor");
+        }
 
 } else {
     header("location: index.php?msg=Wrong%20Username%20or%20Password&type=error");

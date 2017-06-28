@@ -56,9 +56,23 @@ include_once("init.php");
                         required: true,
 
                     },
+                    supplier: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 200
+
+                    },
+                    category: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 200
+
+                    },
                     sell: {
                         required: true,
-
+                    },
+                    quantity: {
+                        required: true,
                     }
                 },
                 messages: {
@@ -74,9 +88,20 @@ include_once("init.php");
                         required: "Please Enter Selling Price",
                         minlength: "Category Name must consist of at least 3 characters"
                     },
+                    supplier: {
+                        required: "Please Enter Supplier Name",
+                        minlength: "Supplier Name must consist of at least 3 characters"
+                    },
+                    category: {
+                        required: "Please Enter Stock Category",
+                        minlength: "Category Name must consist of at least 3 characters"
+                    },
                     cost: {
                         required: "Please Enter Cost Price",
                         minlength: "Category Name must consist of at least 3 characters"
+                    },
+                    quantity:{
+                        required: "Please Enter Stock Quantity"
                     }
                 }
             });
@@ -113,12 +138,12 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="active-tab stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
 
-        <!-- Change this image to your own company's logo -->
         <!-- The logo will automatically be resized to 30px height. -->
         <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
 
@@ -172,6 +197,7 @@ include_once("init.php");
                         $gump->validation_rules(array(
                             'name' => 'required|max_len,100|min_len,3',
                             'stockid' => 'required|max_len,200',
+                            'quantity' => 'required|max_len,200',
                             'sell' => 'required|max_len,200',
                             'cost' => 'required|max_len,200',
                             'supplier' => 'max_len,200',
@@ -182,6 +208,7 @@ include_once("init.php");
                         $gump->filter_rules(array(
                             'name' => 'trim|sanitize_string|mysqli_escape',
                             'stockid' => 'trim|sanitize_string|mysqli_escape',
+                            'quantity' => 'trim|sanitize_string|mysqli_escape',
                             'sell' => 'trim|sanitize_string|mysqli_escape',
                             'cost' => 'trim|sanitize_string|mysqli_escape',
                             'category' => 'trim|sanitize_string|mysqli_escape',
@@ -192,6 +219,7 @@ include_once("init.php");
                         $validated_data = $gump->run($_POST);
                         $name = "";
                         $stockid = "";
+                        $quantity = "";
                         $sell = "";
                         $cost = "";
                         $supplier = "";
@@ -205,20 +233,21 @@ include_once("init.php");
 
                             $name = mysqli_real_escape_string($db->connection, $_POST['name']);
                             $stockid = mysqli_real_escape_string($db->connection, $_POST['stockid']);
+                            $quantity = mysqli_real_escape_string($db->connection, $_POST['quantity']);
                             $sell = mysqli_real_escape_string($db->connection, $_POST['sell']);
                             $cost = mysqli_real_escape_string($db->connection, $_POST['cost']);
                             $supplier = mysqli_real_escape_string($db->connection, $_POST['supplier']);
                             $category = mysqli_real_escape_string($db->connection, $_POST['category']);
-
+                            
 
                             $count = $db->countOf("stock_details", "stock_id ='$stockid'");
                             if ($count == 1) {
-                                echo "<font color=red> Dublicat Entry. Please Verify</font>";
+                                echo "<font color=red> Duplicate Entry. Please Verify</font>";
                             } else {
 
-                                if ($db->query("insert into stock_details(stock_id,stock_name,stock_quatity,supplier_id,company_price,selling_price,category) values('$stockid','$name',0,'$supplier','$cost','$sell','$category')")) {
+                                if ($db->query("insert into stock_details(stock_id,stock_name,stock_quatity,supplier_id,company_price,selling_price,category) values('$stockid','$name','$quantity','$supplier','$cost','$sell','$category')")) {
                                     echo "<br><font color=green size=+1 > [ $name ] Stock Details Added !</font>";
-                                    $db->query("insert into stock_avail(name,quantity) values('$name',0)");
+                                   $db->query("insert into stock_avail(name,quantity) values('$name','$quantity')");
                                 } else
                                     echo "<br><font color=red size=+1 >Problem in Adding !</font>";
 
@@ -238,19 +267,20 @@ include_once("init.php");
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <?php
-                                $max = $db->maxOfAll("id", "stock_details");
-                                $max = $max + 1;
+                                   $max = $db->maxOfAll("id", "stock_details");
+                                   $max = $max + 1;
                                 $autoid = "SD" . $max . "";
-                                ?>
+                                ?> 
                                 <td><span class="man">*</span>Stock ID:</td>
                                 <td><input name="stockid" type="text" id="stockid" readonly="readonly" maxlength="200"
                                            class="round default-width-input"
                                            value="<?php echo isset($autoid) ? $autoid : ''; ?>"/></td>
 
-                                <td><span class="man">*</span>Name:</td>
+                                <td><span class="man">*</span> Stock Name:</td>
                                 <td><input name="name" placeholder="ENTER CATEGORY NAME" type="text" id="name"
                                            maxlength="200" class="round default-width-input"
-                                           value="<?php echo isset($name) ? $name : ''; ?>"/></td>
+                                           value="<?php echo isset($name) ? $name : ''; ?>"/></td>                               
+                            </tr>
 
                             </tr>
                             <tr>
@@ -268,12 +298,12 @@ include_once("init.php");
 
                             </tr>
                             <tr>
-                                <td>Supplier:</td>
+                                <td><span class="man">*</span>Supplier:</td>
                                 <td><input name="supplier" placeholder="ENTER SUPPLIER NAME" type="text" id="supplier"
                                            maxlength="200" class="round default-width-input"
                                            value="<?php echo isset($supplier) ? $supplier : ''; ?>"/></td>
 
-                                <td>Category:</td>
+                                <td><span class="man">*</span>Category:</td>
                                 <td><input name="category" placeholder="ENTER CATEGORY NAME" type="text" id="category"
                                            maxlength="200" class="round default-width-input"
                                            value="<?php echo isset($category) ? $category : ''; ?>"/></td>
@@ -281,6 +311,12 @@ include_once("init.php");
                             </tr>
 
                             <tr>
+                            
+                                <td><span class="man">*</span>Quantity: </td> 
+                                <td><input name="quantity" placeholder="QUANTITY" type="text" id="quantity"
+                                           maxlength="500" class="round default-width-input"
+                                           value="<?php echo isset($quantity) ? $quantity : ''; ?>"/></td>
+
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                             </tr>
@@ -293,7 +329,7 @@ include_once("init.php");
                                 <td>
                                     <input class="button round blue image-right ic-add text-upper" type="submit"
                                            name="Submit" value="Add">
-                                    (Control + S)
+                                    
 
                                 <td align="right"><input class="button round red   text-upper" type="reset" name="Reset"
                                                          value="Reset"></td>

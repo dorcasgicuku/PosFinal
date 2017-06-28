@@ -7,7 +7,7 @@ include_once("init.php");
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Alexandra Keen - Update Category</title>
+    <title>Alexandra Keen - Update User</title>
 
     <!-- Stylesheets -->
 
@@ -28,24 +28,28 @@ include_once("init.php");
             // validate signup form on keyup and submit
             $("#form1").validate({
                 rules: {
-                    name: {
+                    username: {
                         required: true,
                         minlength: 3,
                         maxlength: 200
                     },
-                    address: {
-                        minlength: 3,
+                    password: {
+                        minlength: 6,
                         maxlength: 500
+                    },
+                    answer: {
+                        minlength: 3,
+                        maxlength: 20
                     }
                 },
                 messages: {
                     name: {
-                        required: "Please enter a Category Name",
-                        minlength: "Category Name must consist of at least 3 characters"
+                        required: "Please enter a Username",
+                        minlength: "Username must consist of at least 3 characters"
                     },
-                    address: {
-                        minlength: "Category Discription must be at least 3 characters long",
-                        maxlength: "Category Discription must be at least 3 characters long"
+                    password: {
+                        minlength: " password must be at least 6 characters long",
+                        maxlength: "password  must be at least 6 characters long"
                     }
                 }
             });
@@ -82,92 +86,81 @@ include_once("init.php");
 
         <!-- The logo will automatically be resized to 30px height. -->
         <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
-
     </div>
     <!-- end full-width -->
-
 </div>
 <!-- end header -->
-
-
 <!-- MAIN CONTENT -->
 <div id="content">
-
     <div class="page-full-width cf">
-
         <div class="side-menu fl">
-
-            <h3>Stock Category Management</h3>
+            <h3>Users Management</h3>
             <ul>
-                <li><a href="add_stock.php">Add Stock/Product</a></li>
-                <li><a href="view_product.php">View Stock/Product</a></li>
-                <li><a href="add_category.php">Add Stock Category</a></li>
-                <li><a href="view_category.php">view Stock Category</a></li>
-                <li><a href="view_stock_availability.php">View Stock Available</a></li>
+                <li><a href="add_user.php">Add User</a></li>
+                <li><a href="view_user.php">View User</a></li>
             </ul>
-
         </div>
         <!-- end side-menu -->
 
         <div class="side-content fr">
-
             <div class="content-module">
-
                 <div class="content-module-heading cf">
-
-                    <h3 class="fl">Update Supplier</h3>
+                    <h3 class="fl">Add Customer</h3>
                     <span class="fr expand-collapse-text">Click to collapse</span>
                     <span class="fr expand-collapse-text initial-expand">Click to expand</span>
-
                 </div>
                 <!-- end content-module-heading -->
-
                 <div class="content-module-main cf">
                     <form name="form1" method="post" id="form1" action="">
-                        <p><strong>Add Stock </strong> - Add New </p>
+                        <p><strong>Update Customer Details </strong> </p>
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <?php
                             if (isset($_POST['id'])) {
 
-                                $id = mysqli_real_escape_string($db->connection, $_POST['id']);
-                                $name = trim(mysqli_real_escape_string($db->connection, $_POST['name']));
-                                $address = trim(mysqli_real_escape_string($db->connection, $_POST['address']));
+                                $username = mysqli_real_escape_string($db->connection, $_POST['username']);
+                            $password = mysqli_real_escape_string($db->connection, $_POST['password']);
+                            $user_type = mysqli_real_escape_string($db->connection, $_POST['user_type']);
+                            $answer = mysqli_real_escape_string($db->connection, $_POST['answer']);
 
-
-                                if ($db->query("UPDATE category_details  SET category_name='$name',category_description='$address' where id='$id'"))
-                                    echo "<br><font color=green size=+1 > [ $name ] Supplier Details Updated!</font>";
+                                if ($db->query("UPDATE stock_user  SET username='$username',password='$password',user_type='$user_type',answer='$answer' where id='$id'"))
+                                    echo "<br><font color=green size=+1 > [ $username ] User Details Updated!</font>";
                                 else
                                     echo "<br><font color=red size=+1 >Problem in Updation !</font>";
                             }
-
                             ?>
                             <?php
                             if (isset($_GET['sid']))
                                 $id = $_GET['sid'];
 
-                            $line = $db->queryUniqueObject("SELECT * FROM category_details WHERE id=$id");
+                            $line = $db->queryUniqueObject("SELECT * FROM stock_user WHERE id=$id");
                             ?>
                             <form name="form1" method="post" id="form1" action="">
                                 <input name="id" type="hidden" value="<?php echo $_GET['sid']; ?>">
                                 <tr>
-                                    <td>Name</td>
-                                    <td><input name="name" type="text" id="name" maxlength="200"
+                                    <td>Username</td>
+                                    <td><input name="username" type="text" id="username" maxlength="200"
                                                class="round default-width-input"
-                                               value="<?php echo $line->category_name; ?> "/></td>
-
+                                               value="<?php echo $line->username; ?> "/></td>
+                                    <td>Password</td>
+                                    <td><input name="password" type="password" id="password" maxlength="20"
+                                               class="round default-width-input"
+                                               value="<?php echo $line->password; ?>"/></td>
                                 </tr>
                                 <tr>
                                     <td>&nbsp;</td>
                                     <td>&nbsp;</td>
                                 </tr>
                                 <tr>
-                                    <td>Address</td>
-                                    <td><textarea name="address" cols="15"
-                                                  class="round full-width-textarea"><?php echo $line->category_description; ?></textarea>
-                                    </td>
+                                    <td>User Type</td>
+                                    <td><input name="user_type" type="text" id="user_type" maxlength="20"
+                                               class="round default-width-input"
+                                               value="<?php echo $line->user_type; ?>"/></td>
 
+                                    <td>What is your favourite movie?</td>
+                                    <td><input name="answer" type="text" id="answer" maxlength="20"
+                                               class="round default-width-input"
+                                               value="<?php echo $line->answer; ?>"/></td>
                                 </tr>
-
 
                                 <tr>
                                     <td>
@@ -176,11 +169,9 @@ include_once("init.php");
                                     <td>
                                         <input class="button round blue image-right ic-add text-upper" type="submit"
                                                name="Submit" value="Save">
-                                        (Control + S)
                                     </td>
                                     <td align="right"><input class="button round red   text-upper" type="reset"
                                                              name="Reset" value="Reset"></td>
-
                                 </tr>
                         </table>
                     </form>
@@ -198,6 +189,8 @@ include_once("init.php");
    <p>For Any Queries email to <a href="mailto:alexandra.posnic@gmail.com?subject=Stock%20Management%20System"> 
         alexandra@gmail.com</a>.
     </p>
-</div><!-- end footer -->
+</div>
+    <!-- end footer -->
+
 </body>
 </html>

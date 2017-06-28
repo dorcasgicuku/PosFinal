@@ -39,7 +39,8 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class=" stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+           <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -65,10 +66,12 @@ include_once("init.php");
 
             <h3>Quick Links</h3>
             <ul>
+             <li><a href="add_user.php">Add User</a></li>
                 <li><a href="add_sales.php">Add Sales</a></li>
-                <li><a href="add_purchase.php">Add Purchase</a></li>
+                <li><a href="add_stock.php">Add Purchase</a></li>
                 <li><a href="add_supplier.php">Add Supplier</a></li>
                 <li><a href="add_customer.php">Add Customer</a></li>
+                <li><a href="view_stock_availability.php">View Available Stock</a></li>
                 <li><a href="view_report.php">Report</a></li>
             </ul>
 
@@ -92,9 +95,9 @@ include_once("init.php");
 
 
                     <table style="width:350px; float:left;" border="0" cellpadding="0" cellspacing="0">
-                        <tr>
+                       <!--  <tr>
                             
-                               <!--  <p class="ourProduct" id="ourProduct">Our Products</p> -->
+                               <p class="ourProduct" id="ourProduct">Our Products</p> 
                                 <tr>
                                     <td><img src="images/orange.jpg" alt="Orange" style="width:200px; height:200px; margin:0 30px 0 30px;"></td>
                                     <td><img src="images/apple.jpg" alt="Apples" style="width:200px; height:200px; margin:0 30px 0 30px;"></td>
@@ -131,7 +134,7 @@ include_once("init.php");
                                 </tr>
                             </td>
                         </tr>
-                        
+                        --> 
                         <th>Statistics</th>
                         <tr>
                             <td width="250" align="left">&nbsp;</td>
@@ -146,7 +149,7 @@ include_once("init.php");
                             <td align="left">&nbsp;</td>
                         </tr>
                         <tr>
-                            <td align="left">Tatal Sales Transactions</td>
+                            <td align="left">Total Sales Transactions</td>
                             <td align="left"><?php echo $count = $db->countOfAll("stock_sales"); ?></td>
                         </tr>
                         <tr>

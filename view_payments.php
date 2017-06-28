@@ -137,7 +137,7 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class=" stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="active-tab payment-tab">Payments / Outstandings</a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -196,11 +196,11 @@ include_once("init.php");
                                 <?php
 
 
-                                $SQL = "SELECT DISTINCT(transactionid) FROM  stock_sales where balance>0";
+                                $SQL = "SELECT * FROM  stock_sales where balance>0";
 
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $SQL = "SELECT DISTINCT(transactionid) FROM  stock_sales WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR transactionid  LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' AND balance>0";
+                                    $SQL = "SELECT * FROM  stock_sales WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR transactionid  LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' AND balance>0";
                                 }
 
                                 $tbl_name = "stock_sales";        //your table name
@@ -249,11 +249,11 @@ include_once("init.php");
                                     $start = 0;                                //if no page var is given, set start to 0
 
                                 /* Get data. */
-                                $sql = "SELECT DISTINCT(transactionid) FROM  stock_sales where balance>0 ORDER BY date desc LIMIT $start, $limit ";
+                                $sql = "SELECT * FROM  stock_sales where balance>0 ORDER BY date desc LIMIT $start, $limit ";
 
                                 if (isset($_POST['Search']) AND trim($_POST['searchtxt']) != "") {
 
-                                    $sql = "SELECT DISTINCT(transactionid) FROM  stock_sales WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR transactionid  LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' ORDER BY date desc LIMIT $start, $limit";
+                                    $sql = "SELECT * FROM  stock_sales WHERE stock_name LIKE '%" . $_POST['searchtxt'] . "%' OR supplier_name LIKE '%" . $_POST['searchtxt'] . "%' OR transactionid  LIKE '%" . $_POST['searchtxt'] . "%' OR date LIKE '%" . $_POST['searchtxt'] . "%' ORDER BY date desc LIMIT $start, $limit";
 
 
                                 }
@@ -414,8 +414,9 @@ include_once("init.php");
 
                                 ?>
                                 <tr>
-                                    <th>No</th>
+                                    
                                     <th>Transaction Id</th>
+                                    <th>Customer</th>
                                     <th>Due Date</th>
                                     <th>subtotal</th>
                                     <th>Payment</th>
@@ -443,11 +444,10 @@ include_once("init.php");
                                     <tr>
 
 
-                                        <td>   <?php echo $no + $i; ?></td>
+                                        
                                         <td width="100"><?php echo $line->transactionid; ?></td>
-
+                                        <td width="100"><?php echo $line->customer_id; ?></td>
                                         <td width="100"><?php echo $phpdate; ?></td>
-
                                         <td width="100"><?php echo $line->subtotal; ?></td>
                                         <td width="100"><?php echo $line->payment; ?></td>
                                         <td width="100"><?php echo $line->balance; ?></td>

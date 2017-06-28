@@ -7,7 +7,7 @@ include_once("init.php");
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Alexandra Keen - Add Customer</title>
+    <title>Alexandra Keen - Add User</title>
 
     <!-- Stylesheets -->
 
@@ -157,28 +157,37 @@ include_once("init.php");
                         minlength: 3,
                         maxlength: 200
                     },
-                    address: {
-                        minlength: 3,
+                    password: {
+                        minlength: 6,
                         maxlength: 500
                     },
-                    contact1: {
-                        minlength: 3,
-                        maxlength: 20
-                    },
-                    contact2: {
-                        minlength: 3,
-                        maxlength: 20
+                    user_type: {
+                        minlength: 6,
+                        maxlength: 500
                     }
+                    ,
+                    answer: {
+                        minlength: 6,
+                        maxlength: 500
+                    }
+                   
                 },
                 messages: {
                     name: {
                         required: "Please enter a Customer Name",
                         minlength: "Customer must consist of at least 3 characters"
                     },
-                    address: {
-                        minlength: "Customer Address must be at least 3 characters long",
-                        maxlength: "Customer Address must be at least 3 characters long"
-                    }
+                    password: {
+                        minlength: "Use password must be at least 6 characters long",
+                        maxlength: "Use password must be at least 6 characters long"
+                    },
+                      user_type: {
+                       minlength: "Enter User Type",                        
+                    },
+                    answer: {
+                        minlength: "Give an answer to the security question",
+                        
+                    },
                 }
             });
 
@@ -207,7 +216,7 @@ include_once("init.php");
             <li><a href="view_supplier.php" class="  supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class="stock-tab">Stocks / Products</a></li>
             <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
-            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
+             <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -229,10 +238,10 @@ include_once("init.php");
 
         <div class="side-menu fl">
 
-            <h3>Customers Management</h3>
+            <h3>User Management</h3>
             <ul>
-                <li><a href="add_customer.php">Add Customer</a></li>
-                <li><a href="view_customers.php">View Customers</a></li>
+                <li><a href="add_user.php">Add User</a></li>
+                <li><a href="view_user.php">View Users</a></li>
             </ul>
 
         </div>
@@ -244,7 +253,7 @@ include_once("init.php");
 
                 <div class="content-module-heading cf">
 
-                    <h3 class="fl">Add Customer</h3>
+                    <h3 class="fl">Add User</h3>
                     <span class="fr expand-collapse-text">Click to collapse</span>
                     <span class="fr expand-collapse-text initial-expand">Click to expand</span>
 
@@ -257,45 +266,45 @@ include_once("init.php");
                     <?php
                     //Gump is libarary for Validatoin
 
-                    if (isset($_POST['name'])) {
+                    if (isset($_POST['username'])) {
                         $_POST = $gump->sanitize($_POST);
                         $gump->validation_rules(array(
-                            'name' => 'required|max_len,100|min_len,3',
-                            'address' => 'max_len,200',
-                            'contact1' => 'alpha_numeric|max_len,20',
-                            'contact2' => 'alpha_numeric|max_len,20'
+                            'username' => 'required|max_len,100|min_len,3',
+                            'password' => 'max_len,200',
+                            'user_type' => 'alpha_numeric|max_len,20',
+                            'answer' => 'alpha_numeric|max_len,20'
                         ));
 
                         $gump->filter_rules(array(
-                            'name' => 'trim|sanitize_string|mysqli_escape',
-                            'address' => 'trim|sanitize_string|mysqli_escape',
-                            'contact1' => 'trim|sanitize_string|mysqli_escape',
-                            'contact2' => 'trim|sanitize_string|mysqli_escape'
+                            'username' => 'trim|sanitize_string|mysqli_escape',
+                            'password' => 'trim|sanitize_string|mysqli_escape',
+                            'user_type' => 'trim|sanitize_string|mysqli_escape',
+                            'answer' => 'trim|sanitize_string|mysqli_escape'
                         ));
 
                         $validated_data = $gump->run($_POST);
-                        $name = "";
-                        $address = "";
-                        $contact1 = "";
-                        $contact2 = "";
+                        $username = "";
+                        $password = "";
+                        $user_type = "";
+                        $answer = "";
 
                         if ($validated_data === false) {
                             echo $gump->get_readable_errors(true);
                         } else {
 
 
-                            $name = mysqli_real_escape_string($db->connection, $_POST['name']);
-                            $address = mysqli_real_escape_string($db->connection, $_POST['address']);
-                            $contact1 = mysqli_real_escape_string($db->connection, $_POST['contact1']);
-                            $contact2 = mysqli_real_escape_string($db->connection, $_POST['contact2']);
+                            $username = mysqli_real_escape_string($db->connection, $_POST['username']);
+                            $password = mysqli_real_escape_string($db->connection, $_POST['password']);
+                            $user_type = mysqli_real_escape_string($db->connection, $_POST['user_type']);
+                            $answer = mysqli_real_escape_string($db->connection, $_POST['answer']);
 
-                            $count = $db->countOf("customer_details", "customer_name='$name'");
+                            $count = $db->countOf("stock_user", "username='$username'");
                             if ($count == 1) {
                                 echo "<div class='error-box round'>Duplicate Entry. Please Verify</div>";
                             } else {
 
-                                if ($db->query("insert into customer_details values(NULL,'$name','$address','$contact1','$contact2',0)"))
-                                    echo "<div class='confirmation-box round'>[ $name ] Customer Details Added !</div>";
+                                if ($db->query("insert into stock_user values(NULL,'$username','$password','$user_type','$answer')"))
+                                    echo "<div class='confirmation-box round'>[ $name ] User Details Added !</div>";
                                 else
                                     echo "<div class='error-box round'>Problem in Adding !</div>";
 
@@ -307,31 +316,43 @@ include_once("init.php");
 
                     <form name="form1" method="post" id="form1" action="">
 
-                        <p><strong>Add Customer Details </strong> - Add New ( Control +A)</p>
+                        <p><strong>Add User Details </strong> - Add New ( Control +A)</p>
                         <table class="form" border="0" cellspacing="0" cellpadding="0">
                             <tr>
-                                <td><span class="man">*</span>Name:</td>
-                                <td><input name="name" placeholder="ENTER YOUR FULL NAME" type="text" id="name"
-                                           maxlength="200" class="round default-width-input"
-                                           value="<?php echo isset($name) ? $name : ''; ?>"/></td>
-                                <td>Contact 1</td>
-                                <td><input name="contact1" placeholder="ENTER YOUR ADDRESS contact1" type="text"
-                                           id="buyingrate" maxlength="20" class="round default-width-input"
-                                           value="<?php echo isset($contact1) ? $contact1 : ''; ?>"/></td>
+                                <td><span class="man">*</span> User Name:</td>
+                                <td><input name="username" placeholder="ENTER YOUR USER NAME" type="text" id="username"  maxlength="200" class="round default-width-input"
+                                           value="<?php echo isset($username) ? $username : ''; ?>"/></td>
                             </tr>
                             <tr>
                                 <td>&nbsp;</td>
                                 <td>&nbsp;</td>
                             </tr>
                             <tr>
-                                <td>Address</td>
-                                <td><textarea name="address" placeholder="ENTER YOUR ADDRESS" cols="15"
-                                              class="round full-width-textarea"><?php echo isset($address) ? $address : ''; ?></textarea>
-                                </td>
-                                <td>Contact 2</td>
-                                <td><input name="contact2" placeholder="ENTER YOUR contact2" type="text"
+                                 <td><span class="man">*</span> Password:</td>
+                                <td><input name="password" placeholder="ENTER YOUR PASSWORD " type="password"
+                                           id="password" maxlength="20" class="round default-width-input"
+                                           value="<?php echo isset($password) ? $password : ''; ?>"/></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                             <tr>
+                                 <td><span class="man">*</span> User Type:</td>
+                                <td><input name="user_type" placeholder="User Type  " type="text"
+                                           id="user_type" maxlength="20" class="round default-width-input"
+                                           value="<?php echo isset($user_type) ? $user_type : ''; ?>"/></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                               
+                                 <td><span class="man">*</span> What is your favourite movie?:</td>
+                                <td><input name="contact2" placeholder="ENTER YOUR USER TYPE" type="text"
                                            id="sellingrate" maxlength="20" class="round default-width-input"
-                                           value="<?php echo isset($contact2) ? $contact2 : ''; ?>"/></td>
+                                           value="<?php echo isset($user_type) ? $user_type : ''; ?>"/></td>
 
                             </tr>
 
@@ -350,7 +371,8 @@ include_once("init.php");
                                 <td>
                                     &nbsp;
                                 </td>
-                                <td align="right"><input class="button round red text-upper" type="reset" name="Reset" value="Reset"></td>
+                                <td align="right"><input class="button round red text-upper" type="reset" name="Reset"
+                                                         value="Reset"></td>
                             </tr>
                         </table>
                     </form>

@@ -126,11 +126,7 @@ if (!isset($_SESSION['username']) || $_SESSION['usertype'] != 'admin') { // if s
                                     $result = $db->query("SELECT * FROM stock_entries where  type='entry' AND date BETWEEN '$fromdate' AND '$todate' ");
                                     while ($line = mysqli_fetch_array($result)) {
                                         ?>
-                                        <tr>
-                                            <td><?php $mysqldate = $line->date;
-                                                $phpdate = strtotime($mysqldate);
-                                                $phpdate = date("d/m/Y", $phpdate);
-                                                echo $phpdate; ?></td>
+                                        <tr><td><?php echo $line['date']; ?></td>
                                             <td><?php echo $line['stock_id']; ?></td>
                                             <td><?php echo $line['stock_supplier_name'] ?></td>
                                             <td><?php echo $line['payment'] ?></td>

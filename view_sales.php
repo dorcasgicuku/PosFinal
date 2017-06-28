@@ -139,7 +139,8 @@ include_once("init.php");
             <li><a href="view_purchase.php" class=" purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class=" stock-tab">Stocks / Products</a></li>
-           <!--  <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+           <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
@@ -446,14 +447,13 @@ include_once("init.php");
 
                                 ?>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Stock Name</th>
-                                    <th>Stock Id</th>
+                                     <th>Transaction Id</th>
+                                    <th>Stock Name</th>                                   
                                     <th>Date</th>
-                                    <th>Customer</th>
-
+                                    <th>Customer</th>                                    
+                                    <th>Total Cost</th>
                                     <th>Payment</th>
-                                    <th>Amount</th>
+                                     <th>Balance</th>
                                     <th>Edit /Delete</th>
                                     <th>Select</th>
                                 </tr>
@@ -464,16 +464,13 @@ include_once("init.php");
                                 while ($row = mysqli_fetch_array($result)) {
                                     ?>
                                     <tr>
-                                        <td> <?php echo $no + $i; ?></td>
-
-                                        <td><?php echo $row['stock_name']; ?></td>
-                                        <td> <?php echo $row['transactionid']; ?></td>
+                                       <td> <?php echo $row['transactionid']; ?></td>
+                                        <td><?php echo $row['stock_name']; ?></td> 
                                         <td> <?php echo $row['date']; ?></td>
                                         <td> <?php echo $row['customer_id']; ?></td>
+                                         <td> <?php echo $row['subtotal']; ?></td>
                                         <td> <?php echo $row['payment']; ?></td>
-                                        <td> <?php echo $row['subtotal']; ?></td>
-
-
+                                        <td> <?php echo $row['balance']; ?></td>
                                         <td>
                                             <a href="update_sales.php?sid=<?php echo $row['id']; ?>&table=stock_sales&return=view_sales.php"
                                                class="table-actions-button ic-table-edit">

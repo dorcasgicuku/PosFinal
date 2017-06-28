@@ -39,12 +39,12 @@ include_once("init.php");
             <li><a href="view_purchase.php" class="purchase-tab">Purchase</a></li>
             <li><a href="view_supplier.php" class=" supplier-tab">Supplier</a></li>
             <li><a href="view_product.php" class=" stock-tab">Stocks / Products</a></li>
-            <!-- <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li> -->
+            <li><a href="view_payments.php" class="payment-tab">Payments / Outstandings</a></li>
+            <li><a href="add_user.php" class="active-tab customers-tab"> User </a></li>
             <li><a href="view_report.php" class="report-tab">Reports</a></li>
         </ul>
         <!-- end tabs -->
 
-        <!-- Change this image to your own company's logo -->
         <!-- The logo will automatically be resized to 30px height. -->
         <a href="#" id="company-branding-small" class="fr"><img src="images/save.png"/></a>
 
@@ -64,11 +64,12 @@ include_once("init.php");
 
             <h3>Quick Links</h3>
             <ul>
+            <li><a href="add_user.php ">Add User </a></li>
                 <li><a href="add_sales.php">Add Sales</a></li>
                 <li><a href="add_purchase.php">Add Purchase</a></li>
                 <li><a href="add_supplier.php">Add Supplier</a></li>
                 <li><a href="add_customer.php">Add Customer</a></li>
-                <li><a href="view_report.php">Report</a></li>
+                <!-- li><a href="view_report.php">Report</a></li> -->
             </ul>
 
         </div>
